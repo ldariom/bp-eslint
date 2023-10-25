@@ -1,27 +1,53 @@
 # BpEslint
+Test bench with steps to follow to install eslint, husky and lint-staged
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.3.
+### Prepare
 
-## Development server
+ `ng new bp-eslint`
+ `ng add @angular-eslint/schematics`
+ `npm i prettier --save-dev`
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Now we need to tell the compiler to use prettier:
 
-## Code scaffolding
+We create in the root of the project .prettierrc.json:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+{
+    "singleQuote": true,
+    "printWidth": 120,
+    "useTabs": false,
+    "tabWidth": 2,
+    "htmlWhitespaceSensitivity": "css",
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "endOfLine": "auto"
+}
+``` 
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+add .prettierignore in the project root :
 
-## Running unit tests
+ `npm install husky -D`
+ `npm pkg set scripts.prepare="husky install"`
+ `npm run prepare`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+Add the following configuration to the visual code settings.json file:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+  `"editor.codeActionsOnSave": {
+    "source.organizeImports": true,
+    "source.fixAll.eslint": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }`
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+add in package.json a new line in script:
+
+`"prettier:check": "prettier --check \"src/app/**/*.{json,css,scss,md,ts,html}\""`
+
+# Pending topic
+
+Warring in lint-staged:
+ `Some of your tasks use `git add` command. Please remove it from the config since all modifications made by tasks will be automatically added to the git commit index.`
