@@ -10,12 +10,6 @@
     "lint": "ng lint",
     "prettier:check": "prettier --config .prettierrc --check \"src/**/*.{ts,css,html}\""
   },
-  "husky": {    
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
-      "pre-push": "ng lint && npm run prettier:check && lint-staged"
-    }  
-   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^16.1.0",
